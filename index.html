@@ -45,27 +45,193 @@
 	  </section>
 	</section>
 
+		<section data-markdown>
+	  <textarea data-template>
+## Monte Carlo: Solution by Simulation
 
-	<section>
-	  <h3></h3>
-	  <p align="left"></p>
+<p align="left">The goal of this presentation is to show you when to use Monte Carlo and to provide a couple of interactive examples with visualizations.</p>
 
-	</section>
+-  The idea is that you should first have a good understanding of when Monte Carlo is useful before you dive into the math and mechanics of Monte Carlo.
 
-	<section>
-	  <h3></h3>
+	  </textarea>
+		</section>
 
-	</section>
+		<section data-markdown>
+	  <textarea data-template>
+## Monte Carlo and Analytic Solutions
+
+<p align="left">When an analytic solution is available, you should generally use it.</p>
+
+-  If you make the same underlying assumptions, the analytic solution will be the same as the Monte Carlo, though the Monte Carlo solution will have estimation error.
+
+-  Monte Carlo is useful when an analytic solution is unavailable or difficult to obtain or when the underlying assumptions differ from a continuous-time solution. This is often the case, which makes Monte Carlo an important tool for analysts.
+	  </textarea>
+		</section>
+
+				<section data-markdown>
+	  <textarea data-template>
+## Example: European Option Pricing
+
+<p align="left">Assuming a stock price follows a [geometric Brownian Motion](https://en.wikipedia.org/wiki/Geometric_Brownian_motion), then at time $T$ in the future we have:</p>
+
+$S_T = S_0 e^{(\mu - \frac{1}{2}\sigma^2)T + \sigma B_T}$
+
+<p align="left">where $S_0$ is the stock price today, $\mu$ and $\sigma$ are the stock's drift and volatility respectively, and $B_T$ is the value of a Brownian Motion at time $T$.</p>
+	  </textarea>
+				</section>
+
+<section data-markdown>
+ <textarea data-template>
+-  Since $B_T \sim N(0, T)$, we can create random draws from $B_T$ by drawing from $N(0, 1)$ and multiplying by $\sqrt{T}$. 
+
+-  For each draw of $B_T$ we get a new value of $S_T$.  
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+## Drift and Volatility
+
+<p align="left">We estimate volatility $\sigma$ using [historical or forward looking measures](https://micfm.shinyapps.io/risk_future_past_mobile/).  However, in a [Black-Scholes world](http://www.5minutefinance.org/concepts/black-scholes) the market is complete, and so we can set the drift $\mu$ equal to the risk free rate $r_f$.</p>
+  </textarea>
+</section>
+
+<section data-markdown>
+ <textarea data-template>
+-  Therefore each simulated stock price at time $T$ is:
+
+$S_T = S_0 e^{(r_f - \frac{1}{2}\hat{\sigma}^2)T + \hat{\sigma} N(0, 1)\sqrt{T}}$  
+
+<p align="left">where $N(0, 1)$ is a random draw from a standard Normal distribution.</p>
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+## Interactive App
+
+<p align="left">In both cases we make the same assumptions, namely the stock follows geometric Brownian Motion, $\sigma$ is a constant, and the [market is complete.](https://en.wikipedia.org/wiki/Complete_market). Therefore the Monte Carlo estimate should be equal to the Black-Scholes analytic solution, which is:</p>
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+    
+$C_0 = S_0N(d_1) - Xe^{-rT}N(d_2)$
+
+<!-- <div class ="columns-2"> -->
+
+      <p align="left">where</p>
+
+$d_1 = \frac{ln(\frac{S_0}{X}) + (r+\frac{\sigma^2}{2})T}{\sigma\sqrt{T}}$
+
+$d_2 = d_1 - \sigma\sqrt{T}$
+
+      <p align="left">$C_0$ are $S_0$ are the values of the call option and underlying stock at time 0.  $X$ is the strike price, and $T$ the time until option expiration in years.</p>
+
+<!-- </div> -->
+  </textarea>
+</section>
+
+<section data-markdown>
+ <textarea data-template>
+<!-- [when binomial option pricing presentation is complete, change link to slide on complete market].  -->
+-  On the next slide we calculate the value of a European call option by both the Black-Scholes formula and Monte Carlo.  
+  </textarea>
+</section>
 
 
 <!-- Insert App -->
-<!-- <section data-background-image="./code_image.jpg"> -->
-<!--   <div class="stretch"> -->
-<!--     <iframe src="https://micfm.shinyapps.io/limit_order_book_app1/" height="100%" width="100%"></iframe> -->
-<!--   </div> -->
-<!-- </section> -->
-<!-- </section> -->
+<section data-background-image="./code_image.jpg">
+  <div class="stretch">
+    <iframe src="https://micfm.shinyapps.io/uses_monte_carlo_app1/" height="100%" width="100%"></iframe>
+  </div>
+</section>
 
+
+<section data-markdown>
+  <textarea data-template>
+## Pricing Path-Dependent Options
+
+As mentioned, Monte Carlo makes sense when an analytic solution is unavailable or its solution is intractable.  This is often the case for *path-dependent* options, where payoffs are a function of the stock prices over some interval---the path the stock took to get to its present price.  Examples of such options are:
+
+- American Options: can be exercised prior to expiration.
+
+- Lookback Options: payoff is a function of the maximum (or minimum) stock price over the interval.
+
+- Asian Options: payoff is a function of the average stock price over the interval.
+
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+## Lookback Option
+
+Say an option pays the difference between the *maximum* price of a security over a time period and a set strike price.  So the payoff is: $max(S_{max} - X, 0)$ where $S_{max}$ is the maximum security price over a set interval.  This is a European lookback call option with a fixed strike price (you can also let the strike price float).  
+
+-  If we assume the underlying follows geometric Brownian motion, then this option value [has an analytic solution](https://scholar.google.com/scholar?hl=en&q=goldman+sosin+gatto+1979).
+
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+-  However what if your boss wants you to value a lookback option on an underlying which is described by the following process?
+
+$dS_t = \kappa(\mu_S - S_t)dt + \sigma S_t dB_t$
+
+-  An analytic solution might be possible, but it may take a while to find. This is where it makes sense to turn to Monte Carlo.
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+## Monte Carlo Setup
+
+Given the parameters $\mu_S$, $\kappa$, and $\sigma$, and a starting price, we'll simulate various price paths.  We'll calculate the maximum over each of these price paths, which will give us the lookback call option payoff given the path.  Taking the average value and discounting at the risk-free rate (assuming a complete market) affords the lookback call option's value.  
+
+-  Remember, here we need to simulate the entire security's path over the year, not just the terminal value like in the earlier valuation of a European call.
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+## Monte Carlo Setup
+
+In the next slide we'll price a lookback call with 1 year to maturity, on a security with a \$35 price today. The strike price is \$37, and we will simulate a price path with 252 points (one for each trading day of the year).  For each 
+
+-  You can set the $\kappa$, $\mu$, and $\sigma$ parameters using the slider inputs.  When you change any slider the Monte Carlo valuation is re-run.
+  </textarea>
+</section>
+
+<!-- Insert App -->
+<section data-background-image="./code_image.jpg">
+  <div class="stretch">
+    <iframe src="https://micfm.shinyapps.io/uses_monte_carlo_app2/" height="100%" width="100%"></iframe>
+  </div>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+## Parting Note
+
+Monte Carlo is a good approach in the case where we don't have a closed-form solution give a particular underlying process.  However what if we do have a closed-form solution for a *continuous-time* process, but the lookback option samples the price at discrete points?
+
+For example, what if the lookback option's payoff was the max closing price of the security minus the strike price.  Then the continuous-time solution will likely overvalue the option.
+
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+-  Consider the probability that the maximum value over a period occurs at a closing price.
+
+So in this case, despite having a closed-form solution for a continuous process, it still makes sense to simulate the process in a Monte Carlo solution because this is closer to the actual payoff function.
+
+-  In sum, a good understanding of the problem is necessary to choose the most appropriate solution method. 
+  </textarea>
+</section>
 
 <section>
 <h3>Credits and Collaboration</h3>
