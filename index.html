@@ -153,7 +153,7 @@ $d_2 = d_1 - \sigma\sqrt{T}$
   <textarea data-template>
 ## Pricing Path-Dependent Options
 
-As mentioned, Monte Carlo makes sense when an analytic solution is unavailable or its solution is intractable.  This is often the case for *path-dependent* options, where payoffs are a function of the stock prices over some interval---the path the stock took to get to its present price.  Examples of such options are:
+<p align="left">As mentioned, Monte Carlo makes sense when an analytic solution is unavailable or its solution is intractable.  This is often the case for *path-dependent* options, where payoffs are a function of the stock prices over some interval---the path the stock took to get to its present price.  Examples of such options are:</p>
 
 - American Options: can be exercised prior to expiration.
 
@@ -168,7 +168,7 @@ As mentioned, Monte Carlo makes sense when an analytic solution is unavailable o
   <textarea data-template>
 ## Lookback Option
 
-Say an option pays the difference between the *maximum* price of a security over a time period and a set strike price.  So the payoff is: $max(S_{max} - X, 0)$ where $S_{max}$ is the maximum security price over a set interval.  This is a European lookback call option with a fixed strike price (you can also let the strike price float).  
+<p align="left">Say an option pays the difference between the *maximum* price of a security over a time period and a set strike price.  So the payoff is: $max(S_{max} - X, 0)$ where $S_{max}$ is the maximum security price over a set interval.  This is a European lookback call option with a fixed strike price (you can also let the strike price float).</p>
 
 -  If we assume the underlying follows geometric Brownian motion, then this option value [has an analytic solution](https://scholar.google.com/scholar?hl=en&q=goldman+sosin+gatto+1979).
 
@@ -189,7 +189,7 @@ $dS_t = \kappa(\mu_S - S_t)dt + \sigma S_t dB_t$
   <textarea data-template>
 ## Monte Carlo Setup
 
-Given the parameters $\mu_S$, $\kappa$, and $\sigma$, and a starting price, we'll simulate various price paths.  We'll calculate the maximum over each of these price paths, which will give us the lookback call option payoff given the path.  Taking the average value and discounting at the risk-free rate (assuming a complete market) affords the lookback call option's value.  
+<p align="left">Given the parameters $\mu_S$, $\kappa$, and $\sigma$, and a starting price, we'll simulate various price paths.  We'll calculate the maximum over each of these price paths, which will give us the lookback call option payoff given the path.  Taking the average value and discounting at the risk-free rate (assuming a complete market) affords the lookback call option's value.</p>
 
 -  Remember, here we need to simulate the entire security's path over the year, not just the terminal value like in the earlier valuation of a European call.
   </textarea>
@@ -199,7 +199,7 @@ Given the parameters $\mu_S$, $\kappa$, and $\sigma$, and a starting price, we'l
   <textarea data-template>
 ## Monte Carlo Setup
 
-In the next slide we'll price a lookback call with 1 year to maturity, on a security with a \$35 price today. The strike price is \$37, and we will simulate a price path with 252 points (one for each trading day of the year).  For each 
+<p align="left">In the next slide we'll price a lookback call with 1 year to maturity, on a security with a \$35 price today. The strike price is \$37, and we will simulate a price path with 252 points (one for each trading day of the year).</p>
 
 -  You can set the $\kappa$, $\mu$, and $\sigma$ parameters using the slider inputs.  When you change any slider the Monte Carlo valuation is re-run.
   </textarea>
@@ -216,9 +216,9 @@ In the next slide we'll price a lookback call with 1 year to maturity, on a secu
   <textarea data-template>
 ## Parting Note
 
-Monte Carlo is a good approach in the case where we don't have a closed-form solution give a particular underlying process.  However what if we do have a closed-form solution for a *continuous-time* process, but the lookback option samples the price at discrete points?
+<p align="left">Monte Carlo is a good approach in the case where we don't have a closed-form solution give a particular underlying process.  However what if we do have a closed-form solution for a *continuous-time* process, but the lookback option samples the price at discrete points?</p>
 
-For example, what if the lookback option's payoff was the max closing price of the security minus the strike price.  Then the continuous-time solution will likely overvalue the option.
+<p align="left">For example, what if the lookback option's payoff was the max closing price of the security minus the strike price.  Then the continuous-time solution will likely overvalue the option.</p>
 
   </textarea>
 </section>
@@ -227,7 +227,7 @@ For example, what if the lookback option's payoff was the max closing price of t
   <textarea data-template>
 -  Consider the probability that the maximum value over a period occurs at a closing price.
 
-So in this case, despite having a closed-form solution for a continuous process, it still makes sense to simulate the process in a Monte Carlo solution because this is closer to the actual payoff function.
+<p align="left">So in this case, despite having a closed-form solution for a continuous process, it still makes sense to simulate the process in a Monte Carlo solution because this is closer to the actual payoff function.</p>
 
 -  In sum, a good understanding of the problem is necessary to choose the most appropriate solution method. 
   </textarea>
