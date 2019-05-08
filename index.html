@@ -51,7 +51,7 @@
 
 <p align="left">The goal of this presentation is to show you when to use Monte Carlo and to provide a couple of interactive examples with visualizations.</p>
 
--  The idea is that you should first have a good understanding of when Monte Carlo is useful before you dive into the math and mechanics of Monte Carlo.
+-  The idea is that you should first have a good understanding of when Monte Carlo is useful before you dive into its math and mechanics.
 
 	  </textarea>
 		</section>
@@ -60,25 +60,31 @@
 	  <textarea data-template>
 ## Monte Carlo and Analytic Solutions
 
-<p align="left">When an analytic solution is available, you should generally use it.</p>
+<p align="left"><span class="fragment highlight-current-green">When an analytic solution is available, you should generally use it.</span></p>
 
 -  If you make the same underlying assumptions, the analytic solution will be the same as the Monte Carlo, though the Monte Carlo solution will have estimation error.
-
--  Monte Carlo is useful when an analytic solution is unavailable or difficult to obtain or when the underlying assumptions differ from a continuous-time solution. This is often the case, which makes Monte Carlo an important tool for analysts.
 	  </textarea>
 		</section>
 
-				<section data-markdown>
+		<section data-markdown>
 	  <textarea data-template>
+## Monte Carlo is Useful When...
+
+<p align="left">An <span class="fragment highlight-current-red">analytic solution is unavailable or difficult to obtain or when the underlying assumptions differ from a continuous-time solution</span>. This is often the case, which makes Monte Carlo an important tool for analysts.</p>
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
 ## Example: European Option Pricing
 
 <p align="left">Assuming a stock price follows a [geometric Brownian Motion](https://en.wikipedia.org/wiki/Geometric_Brownian_motion), then at time $T$ in the future we have:</p>
 
-$S_T = S_0 e^{(\mu - \frac{1}{2}\sigma^2)T + \sigma B_T}$
+<span class="fragment highlight-current-green">$S_T = S_0 e^{(\mu - \frac{1}{2}\sigma^2)T + \sigma B_T}$</span>
 
 <p align="left">where $S_0$ is the stock price today, $\mu$ and $\sigma$ are the stock's drift and volatility respectively, and $B_T$ is the value of a Brownian Motion at time $T$.</p>
-	  </textarea>
-				</section>
+  </textarea>
+</section>
 
 <section data-markdown>
  <textarea data-template>
@@ -108,16 +114,36 @@ $S_T = S_0 e^{(r_f - \frac{1}{2}\hat{\sigma}^2)T + \hat{\sigma} N(0, 1)\sqrt{T}}
 
 <section data-markdown>
   <textarea data-template>
-## Interactive App
-
-<p align="left">In both cases we make the same assumptions, namely the stock follows geometric Brownian Motion, $\sigma$ is a constant, and the [market is complete.](https://en.wikipedia.org/wiki/Complete_market). Therefore the Monte Carlo estimate should be equal to the Black-Scholes analytic solution, which is:</p>
+    -  We then simulate *i* possible stock prices at time *T*, and calculate the payoff of the call option for each *i*.
+    -  The *expected* payoff on the option is the average of these payoffs. 
+    -  Then the value of the call option today is the expected payoff discounted back to today.
+<!-- $C_0=e^{-r_fT}\text{mean}(\text{max}(S_{iT} - X, 0))$     -->
   </textarea>
 </section>
 
 <section data-markdown>
   <textarea data-template>
+
+    <p align="left">See here for detailed instructions on how to calculate a call option's value by Monte Carlo, including R code and an Excel spreadsheet.</p>
+
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+## Monte Carlo vs Analytic (Black-Scholes)
+
+<p align="left">In both cases we make the same assumptions, namely the stock follows geometric Brownian Motion, $\sigma$ is a constant, and the [market is complete.](https://en.wikipedia.org/wiki/Complete_market).</p>
+
+- Therefore <span class="fragment highlight-current-green">the Monte Carlo estimate should be equal to the Black-Scholes analytic solution</span>.
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+    ## Black-Scholes Value
     
-$C_0 = S_0N(d_1) - Xe^{-rT}N(d_2)$
+<span class="fragment highlight-current-green">$C_0 = S_0N(d_1) - Xe^{-rT}N(d_2)$</span>
 
 <!-- <div class ="columns-2"> -->
 
@@ -220,13 +246,13 @@ $dS_t = \kappa(\mu_S - S_t)dt + \sigma S_t dB_t$
 
 <p align="left">For example, what if the lookback option's payoff was the max closing price of the security minus the strike price.  Then the continuous-time solution will likely overvalue the option.</p>
 
+-  Consider the probability that the maximum value over a period occurs at a closing price.
+
   </textarea>
 </section>
 
 <section data-markdown>
   <textarea data-template>
--  Consider the probability that the maximum value over a period occurs at a closing price.
-
 <p align="left">So in this case, despite having a closed-form solution for a continuous process, it still makes sense to simulate the process in a Monte Carlo solution because this is closer to the actual payoff function.</p>
 
 -  In sum, a good understanding of the problem is necessary to choose the most appropriate solution method. 
