@@ -179,14 +179,17 @@ $d_2 = d_1 - \sigma\sqrt{T}$
   <textarea data-template>
 ## Pricing Path-Dependent Options
 
-<p align="left">As mentioned, Monte Carlo makes sense when an analytic solution is unavailable or its solution is intractable.  This is often the case for *path-dependent* options, where payoffs are a function of the stock prices over some interval---the path the stock took to get to its present price.  Examples of such options are:</p>
+<p align="left">As mentioned, <span class="fragment highlight-current-green">Monte Carlo makes sense when an analytic solution is unavailable or its solution is intractable</span>.  This is often the case for *path-dependent* options, where payoffs are a function of the stock prices over some interval---the path the stock took to get to its present price.  Examples of such options are:</p>
+  </textarea>
+</section>
 
+<section data-markdown>
+  <textarea data-template>
 - American Options: can be exercised prior to expiration.
 
 - Lookback Options: payoff is a function of the maximum (or minimum) stock price over the interval.
 
 - Asian Options: payoff is a function of the average stock price over the interval.
-
   </textarea>
 </section>
 
@@ -194,7 +197,7 @@ $d_2 = d_1 - \sigma\sqrt{T}$
   <textarea data-template>
 ## Lookback Option
 
-<p align="left">Say an option pays the difference between the *maximum* price of a security over a time period and a set strike price.  So the payoff is: $max(S_{max} - X, 0)$ where $S_{max}$ is the maximum security price over a set interval.  This is a European lookback call option with a fixed strike price (you can also let the strike price float).</p>
+<p align="left">Say an option pays the difference between the *maximum* price of a security over a time period and a set strike price.  So the payoff is $max(S_{max} - X, 0)$ where $S_{max}$ is the maximum security price over a set interval.  This is a European lookback call option with a fixed strike price (you can also let the strike price float).</p>
 
 -  If we assume the underlying follows geometric Brownian motion, then this option value [has an analytic solution](https://scholar.google.com/scholar?hl=en&q=goldman+sosin+gatto+1979).
 
