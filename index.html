@@ -47,14 +47,14 @@
 
 		<section data-markdown>
 	  <textarea data-template>
-## Monte Carlo: Solution by Simulation
+	    <h2>Monte Carlo: Solution by Simulation</h2>
 
 <p align="left">The goal of this presentation is to show you when to use Monte Carlo and to provide a couple of interactive examples with visualizations.</p>
 
--  The idea is that you should first have a good understanding of when Monte Carlo is useful before you dive into its math and mechanics.
-
+-  The idea is that you should first have a good understanding of <span class="fragment highlight-green">when Monte Carlo is useful</span> before you dive into its math and mechanics.
 	  </textarea>
 		</section>
+		
 
 		<section data-markdown>
 	  <textarea data-template>
@@ -88,7 +88,7 @@
 
 <section data-markdown>
  <textarea data-template>
--  Since $B_T \sim N(0, T)$, we can create random draws from $B_T$ by drawing from $N(0, 1)$ and multiplying by $\sqrt{T}$. 
+   -  Since $B_T \sim N(0, T)$, we can <span class="fragment highlight-green">create random draws from $B_T$ by drawing from $N(0, 1)$ and multiplying by $\sqrt{T}$</span>. 
 
 -  For each draw of $B_T$ we get a new value of $S_T$.  
   </textarea>
@@ -106,7 +106,7 @@
  <textarea data-template>
 -  Therefore each simulated stock price at time $T$ is:
 
-$S_T = S_0 e^{(r_f - \frac{1}{2}\hat{\sigma}^2)T + \hat{\sigma} N(0, 1)\sqrt{T}}$  
+<span class="fragment highlight-green">$S_T = S_0 e^{(r_f - \frac{1}{2}\hat{\sigma}^2)T + \hat{\sigma} N(0, 1)\sqrt{T}}$</span>
 
 <p align="left">where $N(0, 1)$ is a random draw from a standard Normal distribution.</p>
   </textarea>
@@ -185,11 +185,11 @@ $d_2 = d_1 - \sigma\sqrt{T}$
 
 <section data-markdown>
   <textarea data-template>
-- American Options: can be exercised prior to expiration.
+    - <span class="fragment highlight-blue">American Options</span>: can be exercised prior to expiration.
 
-- Lookback Options: payoff is a function of the maximum (or minimum) stock price over the interval.
+    - <span class="fragment highlight-blue">Lookback Options</span>: payoff is a function of the maximum (or minimum) stock price over the interval.
 
-- Asian Options: payoff is a function of the average stock price over the interval.
+    - <span class="fragment highlight-blue">Asian Options</span>: payoff is a function of the average stock price over the interval.
   </textarea>
 </section>
 
@@ -197,7 +197,7 @@ $d_2 = d_1 - \sigma\sqrt{T}$
   <textarea data-template>
 ## Lookback Option
 
-<p align="left">Say an option pays the difference between the *maximum* price of a security over a time period and a set strike price.  So the payoff is $max(S_{max} - X, 0)$ where $S_{max}$ is the maximum security price over a set interval.  This is a European lookback call option with a fixed strike price (you can also let the strike price float).</p>
+<p align="left">Say an option pays the difference between the *maximum* price of a security over a time period and a set strike price.  So the <span class="fragment highlight-green">payoff is $max(S_M - X, 0)$ where $S_M$ is the maximum security price over a set interval</span>.  This is a European lookback call option with a fixed strike price (you can also let the strike price float).</p>
 
 -  If we assume the underlying follows geometric Brownian motion, then this option value [has an analytic solution](https://scholar.google.com/scholar?hl=en&q=goldman+sosin+gatto+1979).
 
@@ -208,7 +208,7 @@ $d_2 = d_1 - \sigma\sqrt{T}$
   <textarea data-template>
 -  However what if your boss wants you to value a lookback option on an underlying which is described by the following process?
 
-$dS_t = \kappa(\mu_S - S_t)dt + \sigma S_t dB_t$
+<span class="fragment highlight-green">$dS_t = \kappa(\mu_S - S_t)dt + \sigma S_t dB_t$</span>
 
 -  An analytic solution might be possible, but it may take a while to find. This is where it makes sense to turn to Monte Carlo.
   </textarea>
@@ -218,7 +218,7 @@ $dS_t = \kappa(\mu_S - S_t)dt + \sigma S_t dB_t$
   <textarea data-template>
 ## Monte Carlo Setup
 
-<p align="left">Given the parameters $\mu_S$, $\kappa$, and $\sigma$, and a starting price, we'll simulate various price paths.  We'll calculate the maximum over each of these price paths, which will give us the lookback call option payoff given the path.  Taking the average value and discounting at the risk-free rate (assuming a complete market) affords the lookback call option's value.</p>
+<p align="left">Given the parameters $\mu_S$, $\kappa$, and $\sigma$, and a starting price, we'll <span class="fragment highlight-green">simulate various price paths</span>.  We'll calculate the maximum over each of these price paths, which will give us the lookback call option payoff given the path.  Taking the average value and discounting at the risk-free rate (assuming a complete market) affords the lookback call option's value.</p>
 
 -  Remember, here we need to simulate the entire security's path over the year, not just the terminal value like in the earlier valuation of a European call.
   </textarea>
@@ -245,7 +245,7 @@ $dS_t = \kappa(\mu_S - S_t)dt + \sigma S_t dB_t$
   <textarea data-template>
 ## Parting Note
 
-<p align="left">Monte Carlo is a good approach in the case where we don't have a closed-form solution give a particular underlying process.  However what if we do have a closed-form solution for a *continuous-time* process, but the lookback option samples the price at discrete points?</p>
+<p align="left">Monte Carlo is a good approach in the case where we don't have a closed-form solution give a particular underlying process.  However what if we do have a <span class="fragment highlight-green">closed-form solution for a continuous-time process</span>, but the <b class="fragment highlight-red">lookback option samples the price at discrete points?</b></p>
 
 <p align="left">For example, what if the lookback option's payoff was the max closing price of the security minus the strike price.  Then the continuous-time solution will likely overvalue the option.</p>
 
@@ -258,7 +258,7 @@ $dS_t = \kappa(\mu_S - S_t)dt + \sigma S_t dB_t$
   <textarea data-template>
 <p align="left">So in this case, despite having a closed-form solution for a continuous process, it still makes sense to simulate the process in a Monte Carlo solution because this is closer to the actual payoff function.</p>
 
--  In sum, a good understanding of the problem is necessary to choose the most appropriate solution method. 
+-  In sum, a <b class="fragment highlight-green">good understanding of the problem is necessary to choose the most appropriate solution method</b>. 
   </textarea>
 </section>
 
