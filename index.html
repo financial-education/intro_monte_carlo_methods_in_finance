@@ -98,7 +98,7 @@
   <textarea data-template>
 ## Drift and Volatility
 
-<p align="left">We estimate volatility $\sigma$ using [historical or forward looking measures](https://micfm.shinyapps.io/risk_future_past_mobile/).  However, in a [Black-Scholes world](http://www.5minutefinance.org/concepts/black-scholes) the market is complete, and so we can set the drift $\mu$ equal to the risk free rate $r_f$.</p>
+<p align="left">We estimate volatility $\sigma$ using historical or forward looking measures.  However, in a Black-Scholes world the market is complete, and so we can set the drift $\mu$ equal to the risk free rate $r_f$.</p>
   </textarea>
 </section>
 
@@ -124,7 +124,9 @@
 <section data-markdown>
   <textarea data-template>
 
-    <p align="left">See here for detailed instructions on how to calculate a call option's value by Monte Carlo, including R code and an Excel spreadsheet.</p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/HOSf-lk9JOw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<!---    <p align="left">See here for detailed instructions on how to calculate a call option's value by Monte Carlo, including R code and an Excel spreadsheet.</p> -->
 
   </textarea>
 </section>
@@ -246,6 +248,13 @@ $d_2 = d_1 - \sigma\sqrt{T}$
 ## Parting Note
 
 <p align="left">Monte Carlo is a good approach in the case where we don't have a closed-form solution give a particular underlying process.  However what if we do have a <span class="fragment highlight-green">closed-form solution for a continuous-time process</span>, but the <b class="fragment highlight-red">lookback option samples the price at discrete points?</b></p>
+
+  </textarea>
+</section>
+
+
+<section data-markdown>
+  <textarea data-template>
 
 <p align="left">For example, what if the lookback option's payoff was the max closing price of the security minus the strike price.  Then the continuous-time solution will likely overvalue the option.</p>
 
